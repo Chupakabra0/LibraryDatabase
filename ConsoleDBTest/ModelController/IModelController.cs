@@ -23,9 +23,9 @@ namespace ConsoleDBTest.ModelController {
         protected bool AskBoolean(string message, bool emptyResult = true) {
             try {
                 Console.Write(message);
-                var result = this.ConsoleReader.ReadString();
+                var result = this.ConsoleReader.ReadString().ToLower();
 
-                return result != null && result.Length == 0 ? emptyResult : bool.Parse(message);
+                return result == "t" || result == "true";
             }
             catch (Exception) {
                 return emptyResult;
@@ -37,7 +37,19 @@ namespace ConsoleDBTest.ModelController {
                 Console.Write(message);
                 var result = this.ConsoleReader.ReadString();
 
-                return result != null && result.Length == 0 ? emptyResult : result;
+                return result.Length == 0 ? emptyResult : result;
+            }
+            catch (Exception) {
+                return emptyResult;
+            }
+        }
+
+        protected char AskSymbol(string message, char emptyResult = ' ') {
+            try {
+                Console.Write(message);
+                var result = this.ConsoleReader.ReadSymbol();
+
+                return result != '\0' ? result : emptyResult;
             }
             catch (Exception) {
                 return emptyResult;
@@ -49,7 +61,7 @@ namespace ConsoleDBTest.ModelController {
                 Console.Write(message);
                 var result = this.ConsoleReader.ReadString();
 
-                return result != null && result.Length == 0 ? emptyResult : int.Parse(result);
+                return result.Length == 0 ? emptyResult : int.Parse(result);
             }
             catch (Exception) {
                 return emptyResult;

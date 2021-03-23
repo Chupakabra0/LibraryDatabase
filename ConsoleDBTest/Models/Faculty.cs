@@ -8,7 +8,7 @@ namespace ConsoleDBTest.Models {
 
         public string Name        { get; set; }
         public string ShortName   { get; set; }
-        public char   ShortLetter { get; set; }
+        public string ShortLetter { get; set; }
         public bool   IsActive    { get; set; }
 
         public virtual ICollection<FacultyAndSpecialty> FacultiesAndSpecialties { get; set; }

@@ -7,6 +7,7 @@ namespace ConsoleDBTest.View {
     public class ConsoleView {
         public ConsoleView(DatabaseViewModel databaseViewModel) {
             this.DatabaseViewModel = databaseViewModel;
+            this.DatabaseViewModel.DatabaseContext.SaveChanges();
         }
 
         public void Show() {

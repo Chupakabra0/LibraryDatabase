@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ConsoleDBTest.Models {
     public class Worker {
@@ -10,6 +11,6 @@ namespace ConsoleDBTest.Models {
         public string Patronymic { get; set; }
         public bool   IsActive   { get; set; }
 
-        public int LibraryId    { get; set; }
+        public virtual ICollection<Library> Libraries { get; set; }
     }
 }

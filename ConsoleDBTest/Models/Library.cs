@@ -11,10 +11,10 @@ namespace ConsoleDBTest.Models {
         public DateTime?  TakeDate   { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? ReturnDate { get; set; }
-        public bool      IsActive   { get; set; }
+        public int  WorkerId { get; set; }
+        public bool IsActive { get; set; }
 
         public virtual ICollection<ClientCard> ClientCards { get; set; }
         public virtual ICollection<Book>       Books       { get; set; }
-        public virtual ICollection<Worker>     Workers     { get; set; }
     }
 }

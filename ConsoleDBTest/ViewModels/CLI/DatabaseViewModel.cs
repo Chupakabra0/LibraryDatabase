@@ -23,16 +23,19 @@ namespace ConsoleDBTest.ViewModels.CLI
         public bool ExecuteEdit(string tableName) => 
             this.GetController(tableName)?.Edit(this.DatabaseContext) ?? false;
         
-
         private ConsoleController GetController(string tableName) =>
             tableName switch {
-                "Countries" => new CountryController(),
-                "Genres"    => new GenreController(),
-                "Authors"   => new AuthorController(),
-                _           => null
+                "Countries"   => new CountryController(),
+                "Genres"      => new GenreController(),
+                "Authors"     => new AuthorController(),
+                "Specialties" => new SpecialtyController(),
+                "Cathedras"   => new CathedraController(),
+                "Faculties"   => new FacultyController(),
+                "Degrees"     => new DegreeController(),
+                "Workers"     => new WorkerController(),
+                _             => null
             };
         
-
         public DbContext     DatabaseContext { get; set; }
         public ConsoleReader ConsoleReader   { get; set; }
     }

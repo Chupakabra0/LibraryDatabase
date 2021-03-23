@@ -36,6 +36,15 @@ namespace ConsoleDBTest.Reader {
             }
         }
 
+        public char ReadSymbol() {
+            try {
+                return Console.ReadLine()?.First() ?? char.MinValue;
+            }
+            catch (Exception) {
+                return char.MinValue;
+            }
+        }
+
         public bool ReadBoolean() {
             try {
                 return bool.Parse(Console.ReadLine() ?? "false");
