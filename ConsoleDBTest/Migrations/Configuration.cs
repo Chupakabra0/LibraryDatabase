@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey                 = "ConsoleDBTest.DB.DataContext";
         }
 
         protected override void Seed(ConsoleDBTest.DB.DatabaseContext context)
