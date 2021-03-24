@@ -6,10 +6,9 @@ namespace ConsoleDBTest.Models {
         [Key]
         public int Id { get; set; }
 
-        public bool IsActive { get; set; }
-
-        public int FacultyId   { get; set; }
-        public int SpecialtyId { get; set; }
+        public int  FacultyId   { get; set; }
+        public int  SpecialtyId { get; set; }
+        public bool IsActive    { get; set; }
 
         public virtual ICollection<FacultyAndSpecialtyAndCathedra> FacultiesAndSpecialtiesAndCathedras { get; set; }
     }

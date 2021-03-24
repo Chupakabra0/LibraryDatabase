@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using ConsoleDBTest.Reader;
 using ConsoleDBTest.ViewModels.CLI;
 
 
@@ -7,7 +8,6 @@ namespace ConsoleDBTest.View {
     public class ConsoleView {
         public ConsoleView(DatabaseViewModel databaseViewModel) {
             this.DatabaseViewModel = databaseViewModel;
-            this.DatabaseViewModel.DatabaseContext.SaveChanges();
         }
 
         public void Show() {
@@ -17,7 +17,7 @@ namespace ConsoleDBTest.View {
                 if (tableName == string.Empty) {
                     Console.WriteLine("Connected to DB... Write name of a table to work with.");
                     Console.Write("> ");
-                    tableName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(this.DatabaseViewModel.ConsoleReader
+                    tableName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(this.ConsoleReader
                                                                                     .ReadString()
                                                                                     .ToLower());
                 }
@@ -25,7 +25,7 @@ namespace ConsoleDBTest.View {
                     Console.WriteLine($"Working with {tableName}. Enter your command...");
                     Console.Write("> ");
 
-                    var command = this.DatabaseViewModel.ConsoleReader.ReadString().Split(" ");
+                    var command = this.ConsoleReader.ReadString().Split(" ");
                     switch (command[0]) {
                         case"exit": {
                             tableName = "exit";
@@ -64,5 +64,6 @@ namespace ConsoleDBTest.View {
         }
 
         public DatabaseViewModel DatabaseViewModel { get; set; }
+        public ConsoleReader     ConsoleReader     { get; set; } = new();
     }
 }

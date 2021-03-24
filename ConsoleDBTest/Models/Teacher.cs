@@ -9,10 +9,9 @@ namespace ConsoleDBTest.Models {
         public string Name       { get; set; }
         public string Surname    { get; set; }
         public string Patronymic { get; set; }
+        public int    CityId     { get; set; }
+        public int    CathedraId { get; set; }
         public bool   IsActive   { get; set; }
-
-        public int CityId     { get; set; }
-        public int CathedraId { get; set; }
 
         public virtual ICollection<ClientCard> ClientCards { get; set; }
     }

@@ -25,7 +25,7 @@ namespace ConsoleDBTest.ModelController {
                 Console.Write(message);
                 var result = this.ConsoleReader.ReadString().ToLower();
 
-                return result == "t" || result == "true";
+                return result.Length == 0 ? emptyResult : result == "t" || result == "true";
             }
             catch (Exception) {
                 return emptyResult;

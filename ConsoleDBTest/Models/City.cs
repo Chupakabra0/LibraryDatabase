@@ -7,10 +7,9 @@ namespace ConsoleDBTest.Models
         [Key]
         public int Id { get; set; }
 
-        public string Name     { get; set; }
-        public bool   IsActive { get; set; }
-
-        public int CountryId { get; set; }
+        public string Name      { get; set; }
+        public int    CountryId { get; set; }
+        public bool   IsActive  { get; set; }
 
         public virtual ICollection<Publisher> Publishers { get; set; }
         public virtual ICollection<Teacher>   Teachers   { get; set; }

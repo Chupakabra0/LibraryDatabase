@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Data.Entity;
 using ConsoleDBTest.ModelController;
-using ConsoleDBTest.Reader;
 
 namespace ConsoleDBTest.ViewModels.CLI
 {
     public class DatabaseViewModel {
-        public DatabaseViewModel(DbContext databaseContext, ConsoleReader consoleReader) {
+        public DatabaseViewModel(DbContext databaseContext) {
             this.DatabaseContext = databaseContext;
-            this.ConsoleReader   = consoleReader;
         }
 
         public bool ExecuteShow(string tableName) => 
@@ -25,18 +23,22 @@ namespace ConsoleDBTest.ViewModels.CLI
         
         private ConsoleController GetController(string tableName) =>
             tableName switch {
-                "Countries"   => new CountryController(),
-                "Genres"      => new GenreController(),
-                "Authors"     => new AuthorController(),
-                "Specialties" => new SpecialtyController(),
-                "Cathedras"   => new CathedraController(),
-                "Faculties"   => new FacultyController(),
-                "Degrees"     => new DegreeController(),
-                "Workers"     => new WorkerController(),
-                _             => null
+                "Countries"                      => new CountryController(),
+                "Genres"                         => new GenreController(),
+                "Authors"                        => new AuthorController(),
+                "Specialties"                    => new SpecialtyController(),
+                "Cathedras"                      => new CathedraController(),
+                "Faculties"                      => new FacultyController(),
+                "Degrees"                        => new DegreeController(),
+                "Workers"                        => new WorkerController(),
+                "Cities"                         => new CityController(),
+                "Facultyandspecialties"          => new FacultyAndSpecialtyController(),
+                "Facultyandspecialtyandcathdras" => new FacultyAndSpecialtyAndCathedraController(),
+                "Teachers"                       => new TeacherController(),
+                "Groups"                         => new GroupController(),
+                _                                => null
             };
         
         public DbContext     DatabaseContext { get; set; }
-        public ConsoleReader ConsoleReader   { get; set; }
     }
 }
