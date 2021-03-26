@@ -27,32 +27,32 @@ namespace ConsoleDBTest.View {
 
                     var command = this.ConsoleReader.ReadString().Split(" ");
                     switch (command[0]) {
-                        case"exit": {
+                        case "exit": {
                             tableName = "exit";
                             break;
                         }
-                        case"cls": {
+                        case "cls": {
                             Console.Clear();
                             break;
                         }
-                        case"back": {
+                        case "back": {
                             Console.WriteLine("Back to the table choose menu...");
                             tableName = string.Empty;
                             break;
                         }
-                        case"show": {
+                        case "show": {
                             this.DatabaseViewModel.ExecuteShow(tableName);
                             break;
                         }
-                        case"add": {
+                        case "add": {
                             this.DatabaseViewModel.ExecuteAdd(tableName);
                             break;
                         }
-                        case"remove": {
+                        case "remove": {
                             this.DatabaseViewModel.ExecuteRemove(tableName);
                             break;
                         }
-                        case"edit": {
+                        case "edit": {
                             this.DatabaseViewModel.ExecuteEdit(tableName);
                             break;
                         }

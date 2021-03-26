@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using ConsoleDBTest.Dealer;
+using ConsoleDBTest.ViewModels;
 using ConsoleTables;
 
 namespace ConsoleDBTest.ModelController {
@@ -26,11 +28,10 @@ namespace ConsoleDBTest.ModelController {
 
         public override bool Show(DbContext db) {
             try {
-                var table = ConsoleTable.From(this.CountryDealer.Select(db));
-
-                table.Columns.RemoveAt(table.Columns.Count - 1);
-                table.Options.EnableCount = false;
-                table.Write(Format.MarkDown);
+                this.GetConsoleTable(this.CountryDealer.Select(db).
+                                          Select(country => new CountryViewModel(country)).
+                                          ToList())
+                    .Write(Format.MarkDown);
             }
             catch (Exception) {
                 return false;
@@ -42,8 +43,7 @@ namespace ConsoleDBTest.ModelController {
         public override bool Remove(DbContext db) {
             try {
                 var defaultIntValue = 0;
-
-                var id  = this.AskInt("Enter int Id (): ", defaultIntValue);
+                var id              = this.AskInt("Enter int Id (): ", defaultIntValue);
 
                 if (id > 0) {
                     this.CountryDealer.Delete(db, id);

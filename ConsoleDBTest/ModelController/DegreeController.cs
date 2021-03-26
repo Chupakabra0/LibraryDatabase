@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using ConsoleDBTest.Dealer;
+using ConsoleDBTest.ViewModels;
 using ConsoleTables;
 
 namespace ConsoleDBTest.ModelController {
@@ -25,11 +27,10 @@ namespace ConsoleDBTest.ModelController {
 
         public override bool Show(DbContext db) {
             try {
-                var table = ConsoleTable.From(this.DegreeDealer.Select(db));
-
-                table.Columns.RemoveAt(table.Columns.Count - 1);
-                table.Options.EnableCount = false;
-                table.Write(Format.MarkDown);
+                this.GetConsoleTable(this.DegreeDealer.Select(db)
+                                         .Select(degree => new DegreeViewModel(degree))
+                                         .ToList())
+                    .Write(Format.MarkDown);
             }
             catch (Exception) {
                 return false;

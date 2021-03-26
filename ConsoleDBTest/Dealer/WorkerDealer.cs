@@ -5,13 +5,13 @@ using ConsoleDBTest.Models;
 
 namespace ConsoleDBTest.Dealer {
     public class WorkerDealer {
-        public List<Author> Select(DbContext db) =>
+        public List<Worker> Select(DbContext db) =>
             db.Database
-              .SqlQuery<Author>($@"select * from {WorkerDealer.tableName}").ToList();
+              .SqlQuery<Worker>($@"select * from {WorkerDealer.tableName}").ToList();
 
-        public List<Author> Select(DbContext db, int id) =>
+        public List<Worker> Select(DbContext db, int id) =>
             db.Database
-              .SqlQuery<Author>($@"select * from {WorkerDealer.tableName} where Id = '{id}'").ToList();
+              .SqlQuery<Worker>($@"select * from {WorkerDealer.tableName} where Id = '{id}'").ToList();
 
         public int Delete(DbContext db) =>
             db.Database

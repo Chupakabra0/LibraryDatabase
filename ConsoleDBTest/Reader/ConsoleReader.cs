@@ -58,9 +58,9 @@ namespace ConsoleDBTest.Reader {
             try {
                 var matches = Regex.Matches(dateTime, @"(\d\d).(\d\d).(\d\d\d\d)");
                 return new DateTime
-                    (int.Parse(matches[0].Result("0")),
-                     int.Parse(matches[1].Result("0")),
-                     int.Parse(matches[2].Result("0")));
+                    (int.Parse(matches.First().Groups[3].Value),
+                     int.Parse(matches.First().Groups[2].Value),
+                     int.Parse(matches.First().Groups[1].Value));
             }
             catch (Exception) {
                 return new DateTime();

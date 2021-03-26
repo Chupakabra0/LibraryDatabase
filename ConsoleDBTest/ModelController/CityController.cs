@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using ConsoleDBTest.Dealer;
+using ConsoleDBTest.Models;
+using ConsoleDBTest.ViewModels;
 using ConsoleTables;
 
 namespace ConsoleDBTest.ModelController
@@ -28,13 +31,11 @@ namespace ConsoleDBTest.ModelController
 
         public override bool Show(DbContext db) {
             try {
-                var table = ConsoleTable.From(this.CityDealer.Select(db));
-
-                table.Columns.RemoveAt(table.Columns.Count - 1);
-                table.Columns.RemoveAt(table.Columns.Count - 1);
-                table.Columns.RemoveAt(table.Columns.Count - 1);
-                table.Options.EnableCount = false;
-                table.Write(Format.MarkDown);
+                var a = db.Database.SqlQuery<City>("select * from Cities").ToList().FirstOrDefault();
+                this.GetConsoleTable(this.CityDealer.Select(db)
+                                         .Select(city => new CityViewModel(city))
+                                         .ToList())
+                    .Write(Format.MarkDown);
             }
             catch (Exception) {
                 return false;

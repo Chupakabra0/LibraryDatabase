@@ -2,15 +2,15 @@
 using ConsoleDBTest.Models;
 
 namespace ConsoleDBTest.DB {
-    public class DatabaseContext : DbContext
+    public class UniversityLibrary : DbContext
     {
-        public DatabaseContext() : this(nameof(DatabaseContext)) {
+        public UniversityLibrary() : this(nameof(UniversityLibrary)) {
 
         }
 
-        public DatabaseContext(string nameOrConnectionString)
+        public UniversityLibrary(string nameOrConnectionString)
             : base(nameOrConnectionString) {
-
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
         public DbSet<Author>                         Authors                             { get; set; }
@@ -23,7 +23,7 @@ namespace ConsoleDBTest.DB {
         public DbSet<FacultyAndSpecialtyAndCathedra> FacultiesAndSpecialtiesAndCathedras { get; set; }
         public DbSet<Genre>                          Genres                              { get; set; }
         public DbSet<Group>                          Groups                              { get; set; }
-        public DbSet<Library>                        Library                             { get; set; }
+        public DbSet<LibraryTransaction>             LibraryTransactions                 { get; set; }
         public DbSet<Publisher>                      Publishers                          { get; set; }
         public DbSet<Specialty>                      Specialties                         { get; set; }
         public DbSet<Student>                        Students                            { get; set; }

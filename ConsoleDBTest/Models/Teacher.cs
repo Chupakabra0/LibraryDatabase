@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ConsoleDBTest.ViewModels;
 
 namespace ConsoleDBTest.Models {
     public class Teacher {
@@ -14,5 +15,10 @@ namespace ConsoleDBTest.Models {
         public bool   IsActive   { get; set; }
 
         public virtual ICollection<ClientCard> ClientCards { get; set; }
+
+        public virtual City     City     { get; set; }
+        public virtual Cathedra Cathedra { get; set; }
+
+        public TeacherViewModel ToViewModel() => new(this);
     }
 }

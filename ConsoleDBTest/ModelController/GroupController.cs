@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using ConsoleDBTest.Dealer;
+using ConsoleDBTest.ViewModels;
 using ConsoleTables;
 
 namespace ConsoleDBTest.ModelController {
@@ -12,10 +14,10 @@ namespace ConsoleDBTest.ModelController {
 
                 var year = this.AskInt($"Enter int Year ({defaultIntValue}): ", defaultIntValue);
                 var serial = this.AskInt($"Enter int Serial ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
                 var facultyAndSpecialtyAndCathedraId =
                     this.AskInt($"Enter int FacultyAndSpecialtyAndCathedraId ({defaultIntValue}): ", defaultIntValue);
                 var degreeId = this.AskInt($"Enter int DegreeId ({defaultIntValue}): ", defaultIntValue);
+                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
 
                 this.GroupDealer.AddGroup(db, facultyAndSpecialtyAndCathedraId, degreeId, year, serial, isActive);
             }
@@ -28,11 +30,10 @@ namespace ConsoleDBTest.ModelController {
 
         public override bool Show(DbContext db) {
             try {
-                var table = ConsoleTable.From(this.GroupDealer.Select(db));
-
-                table.Columns.RemoveAt(table.Columns.Count - 1);
-                table.Options.EnableCount = false;
-                table.Write(Format.MarkDown);
+                this.GetConsoleTable(this.GroupDealer.Select(db)
+                                         .Select(group => new GroupViewModel(group))
+                                         .ToList())
+                    .Write(Format.MarkDown);
             }
             catch (Exception) {
                 return false;

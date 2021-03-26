@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using ConsoleDBTest.Reader;
+using ConsoleTables;
 
 namespace ConsoleDBTest.ModelController {
     public interface IModelController {
@@ -76,6 +78,13 @@ namespace ConsoleDBTest.ModelController {
             catch (Exception) {
                 return DateTime.MinValue;
             }
+        }
+
+        protected ConsoleTable GetConsoleTable<T>(IEnumerable<T> source) {
+            var table = ConsoleTable.From(source);
+            table.Options.EnableCount = false;
+
+            return table;
         }
 
         public ConsoleReader ConsoleReader { get; set; }

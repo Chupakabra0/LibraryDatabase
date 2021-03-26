@@ -7,13 +7,13 @@ namespace ConsoleDBTest.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Test : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Test));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "202103241926404_Test"; }
+            get { return "202103262101212_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

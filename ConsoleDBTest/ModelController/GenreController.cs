@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using ConsoleDBTest.Dealer;
+using ConsoleDBTest.ViewModels;
 using ConsoleTables;
 
 namespace ConsoleDBTest.ModelController {
@@ -24,11 +26,10 @@ namespace ConsoleDBTest.ModelController {
 
         public override bool Show(DbContext db) {
             try {
-                var table = ConsoleTable.From(this.GenreDealer.Select(db));
-
-                table.Columns.RemoveAt(table.Columns.Count - 1);
-                table.Options.EnableCount = false;
-                table.Write(Format.MarkDown);
+                this.GetConsoleTable(this.GenreDealer.Select(db)
+                                         .Select(genre => new GenreViewModel(genre))
+                                         .ToList())
+                    .Write(Format.MarkDown);
             }
             catch (Exception) {
                 return false;

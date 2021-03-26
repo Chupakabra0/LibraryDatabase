@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using ConsoleDBTest.ViewModels;
 
 namespace ConsoleDBTest.Models {
     public class ClientCard {
@@ -8,10 +9,13 @@ namespace ConsoleDBTest.Models {
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? DateGiven { get; set; }
-        public bool      IsActive  { get; set; }
+        public int?  StudentId     { get; set; }
+        public int?  TeacherId     { get; set; }
+        public bool  IsActive      { get; set; }
 
-        public int? StudentId;
-        public int? TeacherId;
-        public int  LibraryId;
+        public virtual Student Student { get; set; }
+        public virtual Teacher Teacher { get; set; }
+
+        public ClientCardViewModel ToViewModel() => new(this);
     }
 }
