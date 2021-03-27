@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using ConsoleDBTest.DB;
 using ConsoleDBTest.Reader;
 using ConsoleDBTest.ViewModels.CLI;
-using ConsoleTables;
 
 namespace ConsoleDBTest.View {
     public class ConsoleView {
@@ -61,6 +59,10 @@ namespace ConsoleDBTest.View {
                     }
                     case "Tables": case "T": {
                         this.ShowTableList();
+                        continue;
+                    }
+                    case "Sql": case "S": {
+                        // TODO sql mode
                         continue;
                     }
                     case "Go": case "G": {
@@ -133,9 +135,11 @@ namespace ConsoleDBTest.View {
             Console.WriteLine($"{string.Empty, 6}help{string.Empty, 26}Display help");
             Console.WriteLine($"{string.Empty, 6}quit{string.Empty, 26}Exit from the application");
             Console.WriteLine($"{string.Empty, 6}cls{string.Empty, 27}Clean screen");
-            Console.WriteLine($"{string.Empty, 6}tables{string.Empty, 24}Display list of the tables in database");
+            Console.WriteLine($"{string.Empty, 6}tables [NOT-IMPLEMENTED]{string.Empty, 6}Display list of the tables in database");
+            Console.WriteLine($"{string.Empty, 6}online [NOT-IMPLEMENTED]{string.Empty, 6}Display context table name");
             Console.WriteLine($"{string.Empty, 6}go <table-name>{string.Empty, 15}Make the table <table-name> the current command context");
             Console.WriteLine($"{string.Empty, 6}back{string.Empty, 26}Exit from context table");
+            Console.WriteLine($"{string.Empty, 6}sql [NOT-IMPLEMENTED]{string.Empty, 9}Enable/disable sql mode where you can type MS SQL commands");
             Console.WriteLine();
 
             Console.WriteLine($"{string.Empty, 4}Contexted command:");
