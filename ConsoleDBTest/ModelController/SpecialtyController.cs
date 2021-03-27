@@ -14,7 +14,7 @@ namespace ConsoleDBTest.ModelController {
 
                 var name = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var shortLetter = this.AskString($"Enter string ShortLetter ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
 
                 this.SpecialtyDealer.AddSpecialty(db, name, shortLetter, isActive);
             }
@@ -73,7 +73,7 @@ namespace ConsoleDBTest.ModelController {
 
                 var name = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var shortLetter = this.AskString($"Enter string ShortLetter ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [True/False]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [True/False]({defaultBoolValue}) : ", defaultBoolValue);
 
                 if (id > 0) {
                     this.SpecialtyDealer.UpdateSpecialty(db, id, name, shortLetter, isActive);

@@ -15,7 +15,7 @@ namespace ConsoleDBTest.ModelController {
                 var longName  = this.AskString($"Enter string LongName ({defaultStrValue}): ",  defaultStrValue);
                 var shortName = this.AskString($"Enter string ShortName ({defaultStrValue}): ", defaultStrValue);
                 var isoCode   = this.AskString($"Enter string ISOCode ({defaultStrValue}): ",   defaultStrValue);
-                var isActive  = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive  = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 this.CountryDealer.AddCountry(db, longName, shortName, isoCode, isActive);
             }
@@ -74,7 +74,7 @@ namespace ConsoleDBTest.ModelController {
                 var longName  = this.AskString($"Enter string LongName ({defaultStrValue}): ",  defaultStrValue);
                 var shortName = this.AskString($"Enter string ShortName ({defaultStrValue}): ", defaultStrValue);
                 var isoCode   = this.AskString($"Enter string ISOCode ({defaultStrValue}): ",   defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [True/False]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [True/False]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
                     this.CountryDealer.UpdateCountry(db, id, longName, shortName, isoCode, isActive);

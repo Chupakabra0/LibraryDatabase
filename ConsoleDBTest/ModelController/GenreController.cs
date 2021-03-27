@@ -13,7 +13,7 @@ namespace ConsoleDBTest.ModelController {
                 var defaultBoolValue = true;
 
                 var name  = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 this.GenreDealer.AddGenre(db, name, isActive);
             }
@@ -71,7 +71,7 @@ namespace ConsoleDBTest.ModelController {
                 }
 
                 var name = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [True/False]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [True/False]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
                     this.GenreDealer.UpdateGenre(db, id, name, isActive);

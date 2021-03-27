@@ -17,7 +17,7 @@ namespace ConsoleDBTest.ModelController
                 var name     = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var shortName = this.AskString($"Enter string ShortName ({defaultStrValue}): ", defaultStrValue);
                 var shortLetter = this.AskString($"Enter char ShortLetter ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 this.FacultyDealer.AddFaculty(db, name, shortName, shortLetter, isActive);
             }
@@ -77,7 +77,7 @@ namespace ConsoleDBTest.ModelController
                 var name = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var shortName = this.AskString($"Enter string ShortName ({defaultStrValue}): ", defaultStrValue);
                 var shortLetter = this.AskString($"Enter string ShortLetter ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [True/False]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [True/False]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
                     this.FacultyDealer.UpdateFaculty(db, id, name, shortName, shortLetter, isActive);

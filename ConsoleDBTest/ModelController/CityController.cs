@@ -17,7 +17,7 @@ namespace ConsoleDBTest.ModelController
 
                 var name     = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var countryId = this.AskInt($"Enter int CountryId ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 this.CityDealer.AddCity(db, name, countryId, isActive);
             }
@@ -76,7 +76,7 @@ namespace ConsoleDBTest.ModelController
 
                 var name = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var countryId = this.AskInt($"Enter int CountryId ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [True/False]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [True/False]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
                     this.CityDealer.UpdateCity(db, id, name, countryId, isActive);

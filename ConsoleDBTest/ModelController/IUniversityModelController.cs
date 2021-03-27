@@ -27,7 +27,9 @@ namespace ConsoleDBTest.ModelController {
                 Console.Write(message);
                 var result = this.ConsoleReader.ReadString().ToLower();
 
-                return result.Length == 0 ? emptyResult : result == "t" || result == "true";
+                return result.Length == 0
+                    ? emptyResult
+                    : result == "t" || result == "true" || result == "y" || result == "yes";
             }
             catch (Exception) {
                 return emptyResult;
@@ -70,10 +72,22 @@ namespace ConsoleDBTest.ModelController {
             }
         }
 
+        protected int? AskNullableInt(string message) {
+            try {
+                Console.Write(message);
+                var result = this.ConsoleReader.ReadString();
+
+                return result.Length == 0 ? null : int.Parse(result);
+            }
+            catch (Exception) {
+                return null;
+            }
+        }
+
         protected DateTime? AskDate(string message) {
             try {
                 Console.Write(message);
-                return this.ConsoleReader.ReadDate();
+                return this.ConsoleReader.ReadNullableDate();
             }
             catch (Exception) {
                 return null;

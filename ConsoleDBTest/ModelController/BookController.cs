@@ -10,14 +10,14 @@ namespace ConsoleDBTest.ModelController {
         public override bool Add(UniversityLibrary db) {
             try {
                 var defaultStrValue  = string.Empty;
-                var defaultIntValue  = 0;
                 var defaultBoolValue = true;
+                var defaultIntValue  = 0;
 
                 var name     = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var authorId = this.AskInt($"Enter int AuthorId ({defaultIntValue}): ", defaultIntValue);
                 var publisherId = this.AskInt($"Enter int PublisherId ({defaultIntValue}): ", defaultIntValue);
                 var genreId = this.AskInt($"Enter int GenreId ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 this.BookDealer.AddBook(db, name, authorId, publisherId, genreId, isActive);
             }
@@ -78,7 +78,7 @@ namespace ConsoleDBTest.ModelController {
                 var authorId = this.AskInt($"Enter int AuthorId ({defaultIntValue}): ", defaultIntValue);
                 var publisherId = this.AskInt($"Enter int PublisherId ({defaultIntValue}): ", defaultIntValue);
                 var genreId = this.AskInt($"Enter int GenreId ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
                     this.BookDealer.UpdateBook(db, id, name, authorId, publisherId, genreId, isActive);

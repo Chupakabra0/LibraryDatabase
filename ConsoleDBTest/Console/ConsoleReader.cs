@@ -13,14 +13,24 @@ namespace ConsoleDBTest.Reader {
             }
         }
 
-        public DateTime? ReadDate() => ConsoleReader.ParseDateTime(Console.ReadLine());
+        public int? ReadNullableInt() {
+            try {
+                return Console.Read();
+            }
+            catch (Exception) {
+                return null;
+            }
+        }
+
+        public DateTime? ReadNullableDate() => 
+            ConsoleReader.ParseNullableDateTime(Console.ReadLine());
         
         public string ReadString() {
             try {
                 return Console.ReadLine();
             }
             catch (Exception) {
-                return string.Empty;
+                return null;
             }
         }
 
@@ -42,7 +52,7 @@ namespace ConsoleDBTest.Reader {
             }
         }
 
-        private static DateTime? ParseDateTime(string dateTime) {
+        private static DateTime? ParseNullableDateTime(string dateTime) {
             try {
                 var matches = Regex.Matches(dateTime, @"(\d\d).(\d\d).(\d\d\d\d)");
                 return new DateTime

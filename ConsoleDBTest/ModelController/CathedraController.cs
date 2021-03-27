@@ -16,7 +16,7 @@ namespace ConsoleDBTest.ModelController
 
                 var name     = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var shortName = this.AskString($"Enter string ShortName ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 this.CathedraDealer.AddCathedra(db, name, shortName, isActive);
             }
@@ -75,7 +75,7 @@ namespace ConsoleDBTest.ModelController
 
                 var name = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var shortName = this.AskString($"Enter string ShortName ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [True/False]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [True/False]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
                     this.CathedraDealer.UpdateCathedra(db, id, name, shortName, isActive);

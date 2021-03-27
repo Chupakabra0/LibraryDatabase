@@ -18,7 +18,7 @@ namespace ConsoleDBTest.ModelController {
                 var patronymic = this.AskString($"Enter string Patronymic ({defaultStrValue}): ", defaultStrValue);
                 var cityId = this.AskInt($"Enter int CityId ({defaultIntValue}): ", defaultIntValue);
                 var groupId = this.AskInt($"Enter int GroupId ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
 
                 this.StudentDealer.AddStudent(db, name, surname, patronymic, cityId, groupId, isActive);
             }
@@ -80,7 +80,7 @@ namespace ConsoleDBTest.ModelController {
                 var patronymic = this.AskString($"Enter string Patronymic ({defaultStrValue}): ", defaultStrValue);
                 var cityId = this.AskInt($"Enter int CityId ({defaultIntValue}): ", defaultIntValue);
                 var groupId = this.AskInt($"Enter int GroupId ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
 
                 if (id > 0) {
                     this.StudentDealer.UpdateStudent(db, id, name, surname, patronymic, cityId, groupId, isActive);

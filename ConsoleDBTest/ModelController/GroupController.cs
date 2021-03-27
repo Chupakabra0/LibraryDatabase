@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
 using ConsoleDBTest.DB;
 using ConsoleDBTest.Dealer;
@@ -18,7 +17,7 @@ namespace ConsoleDBTest.ModelController {
                 var facultyAndSpecialtyAndCathedraId =
                     this.AskInt($"Enter int FacultyAndSpecialtyAndCathedraId ({defaultIntValue}): ", defaultIntValue);
                 var degreeId = this.AskInt($"Enter int DegreeId ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 this.GroupDealer.AddGroup(db, facultyAndSpecialtyAndCathedraId, degreeId, year, serial, isActive);
             }
@@ -76,10 +75,10 @@ namespace ConsoleDBTest.ModelController {
 
                 var year     = this.AskInt($"Enter int Year ({defaultIntValue}): ",     defaultIntValue);
                 var serial   = this.AskInt($"Enter int Serial ({defaultIntValue}): ",   defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
                 var facultyAndSpecialtyAndCathedraId =
                     this.AskInt($"Enter int FacultyAndSpecialtyAndCathedraId ({defaultIntValue}): ", defaultIntValue);
                 var degreeId = this.AskInt($"Enter int DegreeId ({defaultIntValue}): ", defaultIntValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
 
                 if (id > 0) {
                     this.GroupDealer.UpdateGroup(db, id, facultyAndSpecialtyAndCathedraId, degreeId, year, serial, isActive);

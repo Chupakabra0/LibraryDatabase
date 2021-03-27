@@ -14,11 +14,11 @@ namespace ConsoleDBTest.ModelController {
                 var defaultNullableValue = "null";
 
                 var dateGiven     = this.AskDate($"Enter DateTime DateGiven ({defaultNullableValue}): ");
-                var studentId     = this.AskInt($"Enter int StudentId ({defaultNullableValue}): ",  defaultIntValue);
-                var teacherId   = this.AskInt($"Enter int TeacherId ({defaultNullableValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var studentId     = this.AskNullableInt($"Enter int StudentId ({defaultNullableValue}): ");
+                var teacherId   = this.AskNullableInt($"Enter int TeacherId ({defaultNullableValue}): ");
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
-                this.ClientCardDealer.AddCard(db, dateGiven, studentId == defaultIntValue ? null : studentId, teacherId == defaultIntValue ? null : teacherId, isActive);
+                this.ClientCardDealer.AddCard(db, dateGiven, studentId, teacherId, isActive);
             }
             catch (Exception) {
                 return false;
@@ -73,16 +73,16 @@ namespace ConsoleDBTest.ModelController {
                     return false;
                 }
 
-                var date = this.AskDate("Enter DateTime DateGiven: ");
-                var studentId = this.AskInt($"Enter int StudentId ({defaultIntValue}): ", defaultIntValue);
-                var teacherId = this.AskInt($"Enter int TeacherId ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var date      = this.AskDate("Enter DateTime DateGiven: ");
+                var studentId = this.AskNullableInt($"Enter int StudentId ({defaultIntValue}): ");
+                var teacherId = this.AskNullableInt($"Enter int TeacherId ({defaultIntValue}): ");
+                var isActive  = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
-                    this.ClientCardDealer.UpdateCard(db, id, date, studentId == defaultIntValue ? null : studentId, teacherId == defaultIntValue ? null : teacherId, isActive);
+                    this.ClientCardDealer.UpdateCard(db, id, date, studentId, teacherId, isActive);
                 }
                 else {
-                    this.ClientCardDealer.UpdateCard(db, date, studentId == defaultIntValue ? null : studentId, teacherId == defaultIntValue ? null : teacherId, isActive);
+                    this.ClientCardDealer.UpdateCard(db, date, studentId, teacherId, isActive);
                 }
             }
             catch (Exception) {

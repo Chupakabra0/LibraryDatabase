@@ -19,7 +19,7 @@ namespace ConsoleDBTest.ModelController {
                 var workerId = this.AskInt($"Enter int WorkerId ({defaultIntValue}): ", defaultIntValue);
                 var bookId = this.AskInt($"Enter int BookId ({defaultIntValue}): ", defaultIntValue);
                 var isReturnInTime = this.AskBoolean($"Enter bool IsReturnInTime [true/false]({defaultBoolValue}): ", defaultBoolValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 this.LibraryTransactionDealer.AddTransaction(db, takeDate, returnDate, clientCardId, workerId, bookId, isReturnInTime, isActive);
             }
@@ -82,7 +82,7 @@ namespace ConsoleDBTest.ModelController {
                 var workerId     = this.AskInt($"Enter int WorkerId ({defaultIntValue}): ",     defaultIntValue);
                 var bookId       = this.AskInt($"Enter int BookId ({defaultIntValue}): ",       defaultIntValue);
                 var isReturnInTime = this.AskBoolean($"Enter bool IsReturnInTime [true/false]({defaultBoolValue}): ", defaultBoolValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
                     this.LibraryTransactionDealer.UpdateTransaction(db, id, takeDate, returnDate, clientCardId, workerId, bookId, isReturnInTime, isActive);

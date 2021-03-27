@@ -8,7 +8,7 @@ using ConsoleDBTest.ViewModels.CLI;
 namespace ConsoleDBTest {
     internal static class Program {
         internal static void Main(string[] args) {
-            new ConsoleView(new DatabaseViewModel(new UniversityLibrary())).Show();
+            new ConsoleView(new DatabaseViewModel(new UniversityLibrary())).ShowMainMenu();
         }
     }
 }

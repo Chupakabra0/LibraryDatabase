@@ -15,7 +15,7 @@ namespace ConsoleDBTest.ModelController {
                 var name = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var surname = this.AskString($"Enter string Surname ({defaultStrValue}): ", defaultStrValue);
                 var patronymic = this.AskString($"Enter string Patronymic ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 this.WorkerDealer.AddWorker(db, name, surname, patronymic, isActive);
             }
@@ -75,7 +75,7 @@ namespace ConsoleDBTest.ModelController {
                 var name = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
                 var surname = this.AskString($"Enter string Surname ({defaultStrValue}): ", defaultStrValue);
                 var patronymic = this.AskString($"Enter string Patronymic ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
                     this.WorkerDealer.UpdateWorker(db, id, name, surname, patronymic, isActive);

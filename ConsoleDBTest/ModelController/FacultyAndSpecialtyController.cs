@@ -14,7 +14,7 @@ namespace ConsoleDBTest.ModelController {
 
                 var facultyId = this.AskInt($"Enter int FacultyId ({defaultIntValue}): ", defaultIntValue);
                 var specialtyId = this.AskInt($"Enter int SpecialtyId ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 this.FacultyAndSpecialtyDealer.AddFacultyAndSpecialty(db, facultyId, specialtyId, isActive);
             }
@@ -72,7 +72,7 @@ namespace ConsoleDBTest.ModelController {
 
                 var facultyId = this.AskInt($"Enter int FacultyId ({defaultIntValue}): ", defaultIntValue);
                 var specialtyId = this.AskInt($"Enter int SpecialtyId ({defaultIntValue}): ", defaultIntValue);
-                var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
+                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
                     this.FacultyAndSpecialtyDealer.UpdateFacultyAndSpecialty(db, id, facultyId, specialtyId, isActive);
