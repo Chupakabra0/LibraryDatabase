@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace ConsoleDBTest.Reader {
     public class ConsoleReader {
-        public ConsoleReader() { }
-
         public int ReadInt() {
             try {
                 return Console.Read();
@@ -18,15 +13,8 @@ namespace ConsoleDBTest.Reader {
             }
         }
 
-        public DateTime ReadDate() {
-            try {
-                return ParseDateTime(Console.ReadLine());
-            }
-            catch (Exception) {
-                return DateTime.MinValue;
-            }
-        }
-
+        public DateTime? ReadDate() => ConsoleReader.ParseDateTime(Console.ReadLine());
+        
         public string ReadString() {
             try {
                 return Console.ReadLine();
@@ -54,7 +42,7 @@ namespace ConsoleDBTest.Reader {
             }
         }
 
-        private static DateTime ParseDateTime(string dateTime) {
+        private static DateTime? ParseDateTime(string dateTime) {
             try {
                 var matches = Regex.Matches(dateTime, @"(\d\d).(\d\d).(\d\d\d\d)");
                 return new DateTime
@@ -63,7 +51,7 @@ namespace ConsoleDBTest.Reader {
                      int.Parse(matches.First().Groups[1].Value));
             }
             catch (Exception) {
-                return new DateTime();
+                return null;
             }
         } 
     }

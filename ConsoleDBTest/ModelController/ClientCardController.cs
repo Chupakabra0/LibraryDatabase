@@ -1,26 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.Dealer;
-using ConsoleDBTest.Models;
 using ConsoleDBTest.ViewModels;
 using ConsoleTables;
 
 namespace ConsoleDBTest.ModelController {
     public class ClientCardController : ConsoleController {
-        public override bool Add(DbContext db) {
+        public override bool Add(UniversityLibrary db) {
             try {
                 var defaultIntValue  = 0;
                 var defaultBoolValue = true;
-                var defaultNullableValue = "NULL";
+                var defaultNullableValue = "null";
 
-                var date     = this.AskDate($"Enter DateTime DateGiven ({defaultNullableValue}): ");
+                var dateGiven     = this.AskDate($"Enter DateTime DateGiven ({defaultNullableValue}): ");
                 var studentId     = this.AskInt($"Enter int StudentId ({defaultNullableValue}): ",  defaultIntValue);
                 var teacherId   = this.AskInt($"Enter int TeacherId ({defaultNullableValue}): ", defaultIntValue);
                 var isActive = this.AskBoolean($"Is it active ? [true/false]({defaultBoolValue}) : ", defaultBoolValue);
 
-                this.ClientCardDealer.AddCard(db, date, studentId == defaultIntValue ? null : studentId, teacherId == defaultIntValue ? null : teacherId, isActive);
+                this.ClientCardDealer.AddCard(db, dateGiven, studentId == defaultIntValue ? null : studentId, teacherId == defaultIntValue ? null : teacherId, isActive);
             }
             catch (Exception) {
                 return false;
@@ -29,10 +27,10 @@ namespace ConsoleDBTest.ModelController {
             return true;
         }
 
-        public override bool Show(DbContext db) {
+        public override bool Show(UniversityLibrary db) {
             try {
                 this.GetConsoleTable(this.ClientCardDealer.Select(db)
-                                         .Select(card => new ClientCardViewModel(card))
+                                         .Select(card => new ClientCardViewModel(card, db))
                                          .ToList())
                     .Write(Format.MarkDown);
 
@@ -44,7 +42,7 @@ namespace ConsoleDBTest.ModelController {
             return true;
         }
 
-        public override bool Remove(DbContext db) {
+        public override bool Remove(UniversityLibrary db) {
             try {
                 var defaultIntValue = 0;
 
@@ -64,7 +62,7 @@ namespace ConsoleDBTest.ModelController {
             return true;
         }
 
-        public override bool Edit(DbContext db) {
+        public override bool Edit(UniversityLibrary db) {
             try {
                 var defaultIntValue  = 0;
                 var defaultBoolValue = true;

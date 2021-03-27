@@ -26,15 +26,15 @@ namespace ConsoleDBTest.Dealer {
 
         public int UpdateTransaction(DbContext db, int id, DateTime? takeDate, DateTime? returnDate, int clientCardId, int workerId, int bookId, bool isReturnInTime, bool isActive) =>
             db.Database
-              .ExecuteSqlCommand($@"update {LibraryTransactionDealer.tableName} set TakeDate={(takeDate == null ? "NULL" : $"'{takeDate}'")}, ReturnDate={(returnDate == null ? "NULL" : $"'{returnDate}'")}, ClientCardId={clientCardId}, WorkerId={workerId}, BookId={bookId}, IsReturnIntTime='{isReturnInTime}', IsActive='{isActive}' where Id = '{id}'");
+              .ExecuteSqlCommand($@"update {LibraryTransactionDealer.tableName} set TakeDate={(takeDate == null ? "null" : $"'{takeDate.Value:yyyy/MM/dd}'")}, ReturnDate={(returnDate == null ? "null" : $"'{returnDate.Value:yyyy/MM/dd}'")}, ClientCardId={clientCardId}, WorkerId={workerId}, BookId={bookId}, IsReturnIntTime='{isReturnInTime}', IsActive='{isActive}' where Id = '{id}'");
 
         public int UpdateTransaction(DbContext db, DateTime? takeDate, DateTime? returnDate, int clientCardId, int workerId, int bookId, bool isReturnInTime, bool isActive) =>
             db.Database
-              .ExecuteSqlCommand($@"update {LibraryTransactionDealer.tableName} set TakeDate={(takeDate == null ? "NULL" : $"'{takeDate}'")}, ReturnDate={(returnDate == null ? "NULL" : $"'{returnDate}'")}, ClientCardId={clientCardId}, WorkerId={workerId}, BookId={bookId}, IsReturnIntTime='{isReturnInTime}', IsActive='{isActive}'");
+              .ExecuteSqlCommand($@"update {LibraryTransactionDealer.tableName} set TakeDate={(takeDate == null ? "null" : $"'{takeDate.Value:yyyy/MM/dd}'")}, ReturnDate={(returnDate == null ? "null" : $"'{returnDate.Value:yyyy/MM/dd}'")}, ClientCardId={clientCardId}, WorkerId={workerId}, BookId={bookId}, IsReturnIntTime='{isReturnInTime}', IsActive='{isActive}'");
 
         public int AddTransaction(DbContext db, DateTime? takeDate, DateTime? returnDate, int clientCardId, int workerId, int bookId, bool isReturnInTime, bool isActive) =>
             db.Database
-              .ExecuteSqlCommand($@"insert into {LibraryTransactionDealer.tableName} (TakeDate, ReturnDate, ClientCardId, WorkerId, BookId, IsReturnInTime, IsActive) values ({(takeDate == null ? "NULL" : $"'{takeDate}'")}, {(returnDate == null ? "NULL" : $"'{returnDate}'")}, {clientCardId}, {workerId}, {bookId}, '{isReturnInTime}', '{isActive}')");
+              .ExecuteSqlCommand($@"insert into {LibraryTransactionDealer.tableName} (TakeDate, ReturnDate, ClientCardId, WorkerId, BookId, IsReturnInTime, IsActive) values ({(takeDate == null ? "null" : $"'{takeDate.Value:yyyy/MM/dd}'")}, {(returnDate == null ? "null" : $"'{returnDate.Value:yyyy/MM/dd}'")}, {clientCardId}, {workerId}, {bookId}, '{isReturnInTime}', '{isActive}')");
 
         private static string tableName = "LibraryTransactions";
     }

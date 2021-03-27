@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.Dealer;
 using ConsoleDBTest.ViewModels;
 using ConsoleTables;
 
 namespace ConsoleDBTest.ModelController {
     public class CountryController : ConsoleController {
-        public override bool Add(DbContext db) {
+        public override bool Add(UniversityLibrary db) {
             try {
                 var defaultStrValue = string.Empty;
                 var defaultBoolValue = true;
@@ -26,7 +26,7 @@ namespace ConsoleDBTest.ModelController {
             return true;
         }
 
-        public override bool Show(DbContext db) {
+        public override bool Show(UniversityLibrary db) {
             try {
                 this.GetConsoleTable(this.CountryDealer.Select(db).
                                           Select(country => new CountryViewModel(country)).
@@ -40,7 +40,7 @@ namespace ConsoleDBTest.ModelController {
             return true;
         }
 
-        public override bool Remove(DbContext db) {
+        public override bool Remove(UniversityLibrary db) {
             try {
                 var defaultIntValue = 0;
                 var id              = this.AskInt("Enter int Id (): ", defaultIntValue);
@@ -59,7 +59,7 @@ namespace ConsoleDBTest.ModelController {
             return true;
         }
 
-        public override bool Edit(DbContext db) {
+        public override bool Edit(UniversityLibrary db) {
             try {
                 var defaultIntValue  = 0;
                 var defaultStrValue  = string.Empty;

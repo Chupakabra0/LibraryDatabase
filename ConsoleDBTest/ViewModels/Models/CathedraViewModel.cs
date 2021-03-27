@@ -9,7 +9,7 @@ namespace ConsoleDBTest.ViewModels {
             this.IsActive  = cathedra.IsActive;
         }
 
-        public int Id { get;           set; }
+        public int    Id        { get; set; }
         public string Name      { get; set; }
         public string ShortName { get; set; }
         public bool   IsActive  { get; set; }

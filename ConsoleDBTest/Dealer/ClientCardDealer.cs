@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using ConsoleDBTest.Models;
+using Microsoft.VisualBasic;
 
 namespace ConsoleDBTest.Dealer {
     public class ClientCardDealer {
@@ -26,15 +27,15 @@ namespace ConsoleDBTest.Dealer {
 
         public int UpdateCard(DbContext db, int id, DateTime? dateGiven, int? studentId, int? teacherId, bool isActive) =>
             db.Database
-              .ExecuteSqlCommand($@"update {ClientCardDealer.tableName} set DateGiven={(dateGiven == null ? "NULL" : $"'{dateGiven}'")}, StudentId={(studentId == null ? "NULL" : studentId)}, TeacherId={(teacherId == null ? "NULL" : teacherId)}, IsActive='{isActive}' where Id = '{id}'");
+              .ExecuteSqlCommand($@"update {ClientCardDealer.tableName} set DateGiven={(dateGiven == null ? "null" : $"'{dateGiven.Value:yyyy/MM/dd}'")}, StudentId={(studentId == null ? "null" : studentId)}, TeacherId={(teacherId == null ? "null" : teacherId)}, IsActive='{isActive}' where Id = '{id}'");
 
         public int UpdateCard(DbContext db, DateTime? dateGiven, int? studentId, int? teacherId, bool isActive) =>
             db.Database
-              .ExecuteSqlCommand($@"update {ClientCardDealer.tableName} set DateGiven={(dateGiven == null ? "NULL" : $"'{dateGiven}'")}, StudentId={(studentId == null ? "NULL" : studentId)}, TeacherId={(teacherId == null ? "NULL" : teacherId)}, IsActive='{isActive}'");
+              .ExecuteSqlCommand($@"update {ClientCardDealer.tableName} set DateGiven={(dateGiven == null ? "null" : $"'{dateGiven.Value:yyyy/MM/dd}'")}, StudentId={(studentId == null ? "null" : studentId)}, TeacherId={(teacherId == null ? "null" : teacherId)}, IsActive='{isActive}'");
 
         public int AddCard(DbContext db, DateTime? dateGiven, int? studentId, int? teacherId, bool isActive) =>
-            db.Database.
-               ExecuteSqlCommand($@"insert into {ClientCardDealer.tableName} (DateGiven, StudentId, TeacherId, IsActive) values ({(dateGiven == null ? "NULL" : $"'{dateGiven}'")}, {(studentId == null ? "NULL" : studentId)}, {(teacherId == null ? "NULL" : teacherId)}, '{isActive}')");
+            db.Database
+              .ExecuteSqlCommand($@"insert into {ClientCardDealer.tableName} (DateGiven, StudentId, TeacherId, IsActive) values ({(dateGiven == null ? "null" : $"'{dateGiven.Value:yyyy/MM/dd}'")}, {(studentId == null ? "null" : studentId)}, {(teacherId == null ? "null" : teacherId)}, '{isActive}')");
         
         private static string tableName = "ClientCards";
     }

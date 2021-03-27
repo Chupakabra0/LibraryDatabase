@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.ViewModels;
 
 namespace ConsoleDBTest.Models {
@@ -16,6 +17,6 @@ namespace ConsoleDBTest.Models {
         public virtual Faculty   Faculty   { get; set; }
         public virtual Specialty Specialty { get; set; }
 
-        public FacultyAndSpecialtyViewModel ToViewModel() => new(this);
+        public FacultyAndSpecialtyViewModel ToViewModel(UniversityLibrary db = null) => new(this, db);
     }
 }

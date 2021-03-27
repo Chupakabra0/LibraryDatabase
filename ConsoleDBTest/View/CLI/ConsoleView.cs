@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
+using ConsoleDBTest.Models;
 using ConsoleDBTest.Reader;
 using ConsoleDBTest.ViewModels.CLI;
 

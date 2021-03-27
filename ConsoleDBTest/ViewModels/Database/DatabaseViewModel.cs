@@ -1,9 +1,10 @@
 ﻿using System.Data.Entity;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.ModelController;
 
 namespace ConsoleDBTest.ViewModels.CLI {
     public class DatabaseViewModel {
-        public DatabaseViewModel(DbContext universityLibrary) {
+        public DatabaseViewModel(UniversityLibrary universityLibrary) {
             this.UniversityLibrary = universityLibrary;
         }
 
@@ -42,6 +43,6 @@ namespace ConsoleDBTest.ViewModels.CLI {
                 _                                 => null
             };
         
-        public DbContext     UniversityLibrary { get; set; }
+        public UniversityLibrary UniversityLibrary { get; set; }
     }
 }

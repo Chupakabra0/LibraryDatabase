@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.ViewModels;
 
 namespace ConsoleDBTest.Models {
@@ -17,6 +19,6 @@ namespace ConsoleDBTest.Models {
 
         public virtual Country Country { get; set; }
 
-        public CityViewModel ToViewModel() => new(this);
+        public CityViewModel ToViewModel(UniversityLibrary db = null) => new(this, db);
     }
 }

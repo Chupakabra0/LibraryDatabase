@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.Reader;
 using ConsoleTables;
 
 namespace ConsoleDBTest.ModelController {
-    public interface IModelController {
-        public bool Add(DbContext db);
-        public bool Show(DbContext db);
-        public bool Remove(DbContext db);
-        public bool Edit(DbContext db);
+    public interface IUniversityModelController {
+        public bool Add(UniversityLibrary    db);
+        public bool Show(UniversityLibrary   db);
+        public bool Remove(UniversityLibrary db);
+        public bool Edit(UniversityLibrary   db);
     }
 
-    public abstract class ConsoleController : IModelController {
-        public abstract bool Add(DbContext    db);
-        public abstract bool Show(DbContext   db);
-        public abstract bool Remove(DbContext db);
-        public abstract bool Edit(DbContext   db);
+    public abstract class ConsoleController : IUniversityModelController {
+        public abstract bool Add(UniversityLibrary    db);
+        public abstract bool Show(UniversityLibrary   db);
+        public abstract bool Remove(UniversityLibrary db);
+        public abstract bool Edit(UniversityLibrary   db);
 
         protected ConsoleController() {
             this.ConsoleReader = new ConsoleReader();
@@ -70,13 +70,13 @@ namespace ConsoleDBTest.ModelController {
             }
         }
 
-        protected DateTime AskDate(string message) {
+        protected DateTime? AskDate(string message) {
             try {
                 Console.Write(message);
                 return this.ConsoleReader.ReadDate();
             }
             catch (Exception) {
-                return DateTime.MinValue;
+                return null;
             }
         }
 

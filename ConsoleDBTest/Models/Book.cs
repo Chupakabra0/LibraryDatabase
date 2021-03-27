@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.ViewModels;
 
 namespace ConsoleDBTest.Models {
@@ -19,6 +20,6 @@ namespace ConsoleDBTest.Models {
         public virtual Publisher Publisher { get; set; }
         public virtual Genre     Genre     { get; set; }
 
-        public BookViewModel ToViewModel() => new(this);
+        public BookViewModel ToViewModel(UniversityLibrary db = null) => new(this, db);
     }
 }
