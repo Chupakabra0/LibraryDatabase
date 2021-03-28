@@ -12,12 +12,13 @@ namespace ConsoleDBTest.ModelController {
                 var defaultStrValue = string.Empty;
                 var defaultBoolValue = true;
 
-                var name = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
-                var surname = this.AskString($"Enter string Surname ({defaultStrValue}): ", defaultStrValue);
+                var name       = this.AskString($"Enter string Name ({defaultStrValue}): ",       defaultStrValue);
+                var surname    = this.AskString($"Enter string Surname ({defaultStrValue}): ",    defaultStrValue);
                 var patronymic = this.AskString($"Enter string Patronymic ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
+                var pseudonym  = this.AskString($"Enter string Pseudonym ({defaultStrValue}): ", defaultStrValue);
+                var isActive   = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
-                this.AuthorDealer.AddAuthor(db, name, surname, patronymic, isActive);
+                this.AuthorDealer.AddAuthor(db, name, surname, patronymic, pseudonym, isActive);
             }
             catch (Exception) {
                 return false;
@@ -72,16 +73,17 @@ namespace ConsoleDBTest.ModelController {
                     return false;
                 }
 
-                var name = this.AskString($"Enter string Name ({defaultStrValue}): ", defaultStrValue);
-                var surname = this.AskString($"Enter string Surname ({defaultStrValue}): ", defaultStrValue);
+                var name       = this.AskString($"Enter string Name ({defaultStrValue}): ",       defaultStrValue);
+                var surname    = this.AskString($"Enter string Surname ({defaultStrValue}): ",    defaultStrValue);
                 var patronymic = this.AskString($"Enter string Patronymic ({defaultStrValue}): ", defaultStrValue);
-                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
+                var pseudonym  = this.AskString($"Enter string Pseudonym ({defaultStrValue}): ",  defaultStrValue);
+                var isActive   = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
 
                 if (id > 0) {
-                    this.AuthorDealer.UpdateAuthor(db, id, name, surname, patronymic, isActive);
+                    this.AuthorDealer.UpdateAuthor(db, id, name, surname, patronymic, pseudonym, isActive);
                 }
                 else {
-                    this.AuthorDealer.UpdateAuthor(db, name, surname, patronymic, isActive);
+                    this.AuthorDealer.UpdateAuthor(db, name, surname, patronymic, pseudonym, isActive);
                 }
             }
             catch (Exception) {

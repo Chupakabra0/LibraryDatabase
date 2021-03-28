@@ -7,6 +7,7 @@ namespace ConsoleDBTest.ViewModels {
             this.Name       = author.Name;
             this.Surname    = author.Surname;
             this.Patronymic = author.Patronymic;
+            this.Pseudonym  = author.Pseudonym;
             this.IsActive   = author.IsActive;
         }
 
@@ -14,6 +15,7 @@ namespace ConsoleDBTest.ViewModels {
         public string Name       { get; set; }
         public string Surname    { get; set; }
         public string Patronymic { get; set; }
+        public string Pseudonym  { get; set; }
         public bool   IsActive   { get; set; }
     }
 }

@@ -22,17 +22,17 @@ namespace ConsoleDBTest.Dealer {
             db.Database
               .ExecuteSqlCommand($@"delete from {AuthorDealer.tableName} where Id = '{id}'");
         
-        public int UpdateAuthor(DbContext db, int id, string name, string surname, string patronymic, bool isActive) =>
+        public int UpdateAuthor(DbContext db, int id, string name, string surname, string patronymic, string pseudonym, bool isActive) =>
             db.Database
-              .ExecuteSqlCommand($@"update {AuthorDealer.tableName} set Name=N'{name}', Surname=N'{surname}', Patronymic=N'{patronymic}', IsActive='{isActive}' where Id = '{id}'");
+              .ExecuteSqlCommand($@"update {AuthorDealer.tableName} set Name=N'{name}', Surname=N'{surname}', Patronymic=N'{patronymic}', Pseudonym=N'{pseudonym}', IsActive='{isActive}' where Id = '{id}'");
 
-        public int UpdateAuthor(DbContext db, string name, string surname, string patronymic, bool isActive) => 
+        public int UpdateAuthor(DbContext db, string name, string surname, string patronymic, string pseudonym, bool isActive) => 
             db.Database.
-               ExecuteSqlCommand($@"update{AuthorDealer.tableName} set Name = N'{name}', Surname = N'{surname}', Patronymic = N'{patronymic}', IsActive = '{isActive}'");
+               ExecuteSqlCommand($@"update{AuthorDealer.tableName} set Name = N'{name}', Surname = N'{surname}', Patronymic = N'{patronymic}', Pseudonym=N'{pseudonym}', IsActive = '{isActive}'");
         
-        public int AddAuthor(DbContext db, string name, string surname, string patronymic, bool isActive) =>
+        public int AddAuthor(DbContext db, string name, string surname, string patronymic, string pseudonym, bool isActive) =>
             db.Database.
-               ExecuteSqlCommand($@"insert into {AuthorDealer.tableName} values (N'{name}', N'{surname}',N'{patronymic}', '{isActive}')");
+               ExecuteSqlCommand($@"insert into {AuthorDealer.tableName} values (N'{name}', N'{surname}', N'{patronymic}', N'{pseudonym}', '{isActive}')");
 
         private const string tableName = nameof(UniversityLibrary.Authors);
     }

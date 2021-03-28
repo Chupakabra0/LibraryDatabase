@@ -10,6 +10,7 @@ namespace ConsoleDBTest.Models {
         public string Name       { get; set; }
         public string Surname    { get; set; }
         public string Patronymic { get; set; }
+        public string Pseudonym  { get; set; }
         public bool   IsActive   { get; set; }
 
         public virtual ICollection<Book> Books { get; set; }

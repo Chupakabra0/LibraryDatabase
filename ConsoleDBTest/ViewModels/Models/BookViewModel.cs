@@ -18,7 +18,9 @@ namespace ConsoleDBTest.ViewModels {
                            ?.ToList()
                            ?.First();
 
-            return author == null ? "null" : $"{author.Name.First()}. {author.Patronymic.First()}. {author.Surname}";
+            return author == null ? "null" : 
+                string.IsNullOrEmpty(author.Pseudonym) ?
+                    $"{author.Name.First()}. {author.Patronymic.First()}. {author.Surname}" : author.Pseudonym;
         }
 
         private static string GetPublisherName(int publisherId, UniversityLibrary db) =>
