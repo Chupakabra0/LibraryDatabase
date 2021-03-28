@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using ConsoleDBTest.DB;
 using ConsoleDBTest.Reader;
 using ConsoleDBTest.Utils.StringUtils;
