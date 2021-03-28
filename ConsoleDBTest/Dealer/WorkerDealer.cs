@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.Models;
 
 namespace ConsoleDBTest.Dealer {
@@ -31,8 +32,8 @@ namespace ConsoleDBTest.Dealer {
 
         public int AddWorker(DbContext db, string name, string surname, string patronymic, bool isActive) =>
             db.Database.
-               ExecuteSqlCommand($@"insert into {WorkerDealer.tableName} (Name, Surname, Patronymic, IsActive) values (N'{name}', N'{surname}',N'{patronymic}', '{isActive}')");
+               ExecuteSqlCommand($@"insert into {WorkerDealer.tableName} values (N'{name}', N'{surname}',N'{patronymic}', '{isActive}')");
 
-        private static string tableName = "Workers";
+        private const string tableName = nameof(UniversityLibrary.Workers);
     }
 }

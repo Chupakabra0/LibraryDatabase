@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.Models;
 
 namespace ConsoleDBTest.Dealer {
@@ -33,8 +34,8 @@ namespace ConsoleDBTest.Dealer {
 
         public int AddGroup(DbContext db, int facultyAndSpecialtyAndCathedraId, int degreeId, int year, int serial, bool isActive) =>
             db.Database
-              .ExecuteSqlCommand($@"insert into {GroupDealer.tableName} (FacultyAndSpecialtyAndCathedraId, DegreeId, Year, Serial, IsActive) values ('{facultyAndSpecialtyAndCathedraId}', {degreeId}, {year}, {serial}, '{isActive}')");
+              .ExecuteSqlCommand($@"insert into {GroupDealer.tableName} values ('{facultyAndSpecialtyAndCathedraId}', {degreeId}, {year}, {serial}, '{isActive}')");
 
-        private static string tableName = "Groups";
+        private const string tableName = nameof(UniversityLibrary.Genres);
     }
 }

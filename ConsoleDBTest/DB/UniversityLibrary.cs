@@ -21,7 +21,7 @@ namespace ConsoleDBTest.DB {
         public DbSet<Country>                        Countries                       { get; set; }
         public DbSet<Degree>                         Degrees                         { get; set; }
         public DbSet<Faculty>                        Faculties                       { get; set; }
-        public DbSet<FacultyAndSpecialty>            FacultyAndSpecialties         { get; set; }
+        public DbSet<FacultyAndSpecialty>            FacultyAndSpecialties           { get; set; }
         public DbSet<FacultyAndSpecialtyAndCathedra> FacultyAndSpecialtyAndCathedras { get; set; }
         public DbSet<Genre>                          Genres                          { get; set; }
         public DbSet<Group>                          Groups                          { get; set; }

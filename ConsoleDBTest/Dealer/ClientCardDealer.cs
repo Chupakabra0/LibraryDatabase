@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.Models;
-using Microsoft.VisualBasic;
 
 namespace ConsoleDBTest.Dealer {
     public class ClientCardDealer {
@@ -37,6 +37,6 @@ namespace ConsoleDBTest.Dealer {
             db.Database
               .ExecuteSqlCommand($@"insert into {ClientCardDealer.tableName} (DateGiven, StudentId, TeacherId, IsActive) values ({(dateGiven == null ? "null" : $"'{dateGiven.Value:yyyy/MM/dd}'")}, {(studentId == null ? "null" : studentId)}, {(teacherId == null ? "null" : teacherId)}, '{isActive}')");
         
-        private static string tableName = "ClientCards";
+        private const string tableName = nameof(UniversityLibrary.ClientCards);
     }
 }
