@@ -30,7 +30,7 @@ namespace ConsoleDBTest.View {
                 var command = arguments?.ElementAtOrDefault(0);
 
                 switch (command) {
-                    case "Back": case "B": {
+                    case nameof(ConsoleNoContextCommands.Back): case "B": {
                         if (tableName != string.Empty) {
                             Console.WriteLine($@"Exited from {tableName}...");
                             tableName = string.Empty;
@@ -40,43 +40,34 @@ namespace ConsoleDBTest.View {
                         }
                         continue;
                     }
-                    case "Quit": case "Q": {
+                    case nameof(ConsoleNoContextCommands.Quit): case "Q": {
                         Console.WriteLine(@"Work has completed...");
                         isWorking = false;
                         continue;
                     }
-                    case "Cls": case "C": {
+                    case nameof(ConsoleNoContextCommands.Cls): case "C": {
                         Console.Clear();
                         continue;
                     }
-                    case "Help": case "H": {
+                    case nameof(ConsoleNoContextCommands.Help): case "H": {
                         this.ShowHelp();
                         continue;
                     }
-                    case "Online": case "O": {
+                    case nameof(ConsoleNoContextCommands.Online): case "O": {
                         // TODO show context table
                         continue;
                     }
-                    case "Tables": case "T": {
+                    case nameof(ConsoleNoContextCommands.Tables): case "T": {
                         this.ShowTableList();
                         continue;
                     }
-                    case "Sql": case "S": {
+                    case nameof(ConsoleNoContextCommands.Sql): case "S": {
                         // TODO sql mode
                         continue;
                     }
-                    case "Go": case "G": {
-                        var temp = CultureInfo.CurrentCulture.TextInfo.ToTitleCase
-                            (arguments?.ElementAtOrDefault(1)?.ToLower() ?? string.Empty);
-
-                        if (this.GetTableList().Contains(temp)) {
-                            tableName = temp;
-                            Console.WriteLine($@"Connected to {tableName}...");
-                        }
-                        else {
-                            Console.WriteLine($@"Table {temp} doesn't exist!");
-                        }
-
+                    case nameof(ConsoleNoContextCommands.Go): case "G": {
+                        tableName = this.GetGoTableName(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(arguments?.ElementAtOrDefault(1)?.ToLower() ?? string.Empty),
+                                            tableName);
                         continue;
                     }
                 }
@@ -86,23 +77,23 @@ namespace ConsoleDBTest.View {
                 }
                 else {
                     switch (command) {
-                        case "Show": case "S": {
+                        case nameof(ConsoleContextCommands.Show): case "S": {
                             this.DatabaseViewModel.ExecuteShow(tableName);
                             break;
                         }
-                        case "Add": case "A": {
+                        case nameof(ConsoleContextCommands.Add): case "A": {
                             this.DatabaseViewModel.ExecuteAdd(tableName);
                             break;
                         }
-                        case "Edit": case "E": {
+                        case nameof(ConsoleContextCommands.Edit): case "E": {
                             this.DatabaseViewModel.ExecuteEdit(tableName);
                             break;
                         }
-                        case "Remove": case "R": {
+                        case nameof(ConsoleContextCommands.Remove): case "R": {
                             this.DatabaseViewModel.ExecuteRemove(tableName);
                             break;
                         }
-                        //case "Duplicate": case "D": {
+                        //case nameof(ConsoleContextCommands.Duplicate): case "D": {
                         //    this.DatabaseViewModel.ExecuteCopy(tableName);
                         //    break;
                         //}
@@ -149,6 +140,17 @@ namespace ConsoleDBTest.View {
             Console.WriteLine($"{string.Empty, 6}remove{string.Empty, 24}Remove existing item in the context table by id");
             Console.WriteLine($"{string.Empty, 6}duplicate [NOT-IMPLEMENTED]{string.Empty, 3}Copy existing item to the context table by id");
             Console.WriteLine();
+        }
+
+        private string GetGoTableName(string tableName, string defaultValue) {
+            if (this.GetTableList().Contains(tableName)) {
+                Console.WriteLine($@"Connected to {tableName}...");
+                return tableName;
+            }
+
+            Console.WriteLine($@"Table {tableName} doesn't exist!");
+
+            return defaultValue;
         }
 
         private void ShowTableList() {
