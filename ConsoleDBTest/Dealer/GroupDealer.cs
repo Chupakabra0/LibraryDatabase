@@ -36,6 +36,6 @@ namespace ConsoleDBTest.Dealer {
             db.Database
               .ExecuteSqlCommand($@"insert into {GroupDealer.tableName} values ('{facultyAndSpecialtyAndCathedraId}', {degreeId}, {year}, {serial}, '{isActive}')");
 
-        private const string tableName = nameof(UniversityLibrary.Genres);
+        private const string tableName = nameof(UniversityLibrary.Groups);
     }
 }
