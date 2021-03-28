@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using ConsoleDBTest.DB;
 using ConsoleDBTest.Models;
+using ConsoleDBTest.Utils.StringUtils;
 
 namespace ConsoleDBTest.ViewModels {
     public class BookViewModel {
@@ -20,7 +21,7 @@ namespace ConsoleDBTest.ViewModels {
 
             return author == null ? "null" : 
                 string.IsNullOrEmpty(author.Pseudonym) ?
-                    $"{author.Name.First()}. {author.Patronymic.First()}. {author.Surname}" : author.Pseudonym;
+                    StringUtils.GetPersonName(author.Name, author.Surname, author.Patronymic) : author.Pseudonym;
         }
 
         private static string GetPublisherName(int publisherId, UniversityLibrary db) =>

@@ -1,9 +1,15 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using ConsoleDBTest.DB;
 using ConsoleDBTest.ModelController;
+using ConsoleDBTest.Utils.StringUtils;
 
-namespace ConsoleDBTest.ViewModels.CLI {
-    public class DatabaseViewModel {
+namespace ConsoleDBTest.ViewModels.CLI
+{
+    public class DatabaseViewModel
+    {
         public DatabaseViewModel(UniversityLibrary universityLibrary) =>
             this.UniversityLibrary = universityLibrary;
 
@@ -19,29 +25,32 @@ namespace ConsoleDBTest.ViewModels.CLI {
         public bool ExecuteEdit(string tableName) =>
             this.GetController(tableName)?.Edit(this.UniversityLibrary) ?? false;
 
-        public ConsoleController GetController(string tableName) =>
-            CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tableName) switch {
-                nameof(this.UniversityLibrary.Countries)                       => new CountryController(),
-                nameof(this.UniversityLibrary.Genres)                          => new GenreController(),
-                nameof(this.UniversityLibrary.Authors)                         => new AuthorController(),
-                nameof(this.UniversityLibrary.Specialties)                     => new SpecialtyController(),
-                nameof(this.UniversityLibrary.Cathedras)                       => new CathedraController(),
-                nameof(this.UniversityLibrary.Faculties)                       => new FacultyController(),
-                nameof(this.UniversityLibrary.Degrees)                         => new DegreeController(),
-                nameof(this.UniversityLibrary.Workers)                         => new WorkerController(),
-                nameof(this.UniversityLibrary.Cities)                          => new CityController(),
-                nameof(this.UniversityLibrary.FacultyAndSpecialties)           => new FacultyAndSpecialtyController(),
-                nameof(this.UniversityLibrary.FacultyAndSpecialtyAndCathedras) => new FacultyAndSpecialtyAndCathedraController(),
-                nameof(this.UniversityLibrary.Teachers)                        => new TeacherController(),
-                nameof(this.UniversityLibrary.Groups)                          => new GroupController(),
-                nameof(this.UniversityLibrary.Students)                        => new StudentController(),
-                nameof(this.UniversityLibrary.ClientCards)                     => new ClientCardController(),
-                nameof(this.UniversityLibrary.Publishers)                      => new PublisherController(),
-                nameof(this.UniversityLibrary.Books)                           => new BookController(),
-                nameof(this.UniversityLibrary.LibraryTransactions)             => new LibraryTransactionController(),
-                _                                                              => null
-            };
+        public ConsoleController GetController(string tableName) {
+            this.Controllers.TryGetValue(tableName, out var controller);
+            return controller;
+        }
 
         public UniversityLibrary UniversityLibrary { get; set; }
+
+        public Dictionary<string, ConsoleController> Controllers { get; } = new() {
+            { nameof(DatabaseViewModel.UniversityLibrary.Countries).ToFirstLetterUpperCase(), new CountryController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Genres).ToFirstLetterUpperCase(), new GenreController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Authors).ToFirstLetterUpperCase(), new AuthorController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Specialties).ToFirstLetterUpperCase(), new SpecialtyController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Cathedras).ToFirstLetterUpperCase(), new CathedraController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Faculties).ToFirstLetterUpperCase(), new FacultyController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Degrees).ToFirstLetterUpperCase(), new DegreeController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Workers).ToFirstLetterUpperCase(), new WorkerController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Cities).ToFirstLetterUpperCase(), new CityController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.FacultyAndSpecialties).ToFirstLetterUpperCase(), new FacultyAndSpecialtyController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.FacultyAndSpecialtyAndCathedras).ToFirstLetterUpperCase(), new FacultyAndSpecialtyAndCathedraController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Teachers).ToFirstLetterUpperCase(), new TeacherController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Groups).ToFirstLetterUpperCase(), new GroupController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Students).ToFirstLetterUpperCase(), new StudentController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.ClientCards).ToFirstLetterUpperCase(), new ClientCardController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Publishers).ToFirstLetterUpperCase(), new PublisherController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.Books).ToFirstLetterUpperCase(), new BookController() },
+            { nameof(DatabaseViewModel.UniversityLibrary.LibraryTransactions).ToFirstLetterUpperCase(), new LibraryTransactionController() }
+        };
     }
 }

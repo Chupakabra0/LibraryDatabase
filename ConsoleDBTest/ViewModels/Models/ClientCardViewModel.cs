@@ -2,6 +2,7 @@
 using System.Linq;
 using ConsoleDBTest.DB;
 using ConsoleDBTest.Models;
+using ConsoleDBTest.Utils.StringUtils;
 
 namespace ConsoleDBTest.ViewModels {
     public class ClientCardViewModel {
@@ -26,7 +27,7 @@ namespace ConsoleDBTest.ViewModels {
                           ?.ToList()
                           ?.First();
 
-            return student == null ? "null" : $"{student.Name.First()}. {student.Patronymic.First()}. {student.Surname}";
+            return student == null ? "null" : StringUtils.GetPersonName(student.Name, student.Surname, student.Patronymic);
         }
 
         private static string GetTeacherName(int? teacherId, UniversityLibrary db) {
@@ -38,7 +39,7 @@ namespace ConsoleDBTest.ViewModels {
                             ?.ToList()
                             ?.First();
 
-            return teacher == null ? "null" : $"{teacher.Name.First()}. {teacher.Patronymic.First()}. {teacher.Surname}";
+            return teacher == null ? "null" : StringUtils.GetPersonName(teacher.Name, teacher.Surname, teacher.Patronymic);
         }
 
         public int    Id        { get; set; }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ConsoleDBTest.DB;
 using ConsoleDBTest.Reader;
+using ConsoleDBTest.Utils.StringUtils;
 using ConsoleDBTest.ViewModels.CLI;
 
 namespace ConsoleDBTest.View {
@@ -23,9 +25,8 @@ namespace ConsoleDBTest.View {
             while (isWorking) {
                 Console.Write(@"> ");
 
-                var arguments = this.ConsoleReader.ReadString()
-                                    .ToLower().Split(" ")
-                                    .Select(word => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(word))
+                var arguments = this.ConsoleReader.ReadString().Split(" ")
+                                    .Select(word => word.ToFirstLetterUpperCase())
                                     .ToList();
                 var command = arguments?.ElementAtOrDefault(0);
 
@@ -66,8 +67,7 @@ namespace ConsoleDBTest.View {
                         continue;
                     }
                     case nameof(ConsoleNoContextCommands.Go): case "G": {
-                        tableName = this.GetGoTableName(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(arguments?.ElementAtOrDefault(1)?.ToLower() ?? string.Empty),
-                                            tableName);
+                        tableName = this.GetGoTableName(arguments?.ElementAtOrDefault(1)?.ToFirstLetterUpperCase() ?? string.Empty, tableName);
                         continue;
                     }
                 }
@@ -147,8 +147,9 @@ namespace ConsoleDBTest.View {
                 Console.WriteLine($@"Connected to {tableName}...");
                 return tableName;
             }
-
-            Console.WriteLine($@"Table {tableName} doesn't exist!");
+            if (!string.IsNullOrEmpty(tableName)) {
+                Console.WriteLine($@"Table {tableName} doesn't exist!");
+            }
 
             return defaultValue;
         }
@@ -160,14 +161,9 @@ namespace ConsoleDBTest.View {
         }
 
         private List<string> GetTableList() {
-            var list = this.DatabaseViewModel.UniversityLibrary.Database
-                           .SqlQuery<string>("select name from sys.tables")?.ToList();
-            
-            if (list is null) {
-                return null;
-            }
-
-            list.RemoveAll(tableName => Regex.IsMatch(tableName, @"^__.*?$"));
+            //var list = this.DatabaseViewModel.UniversityLibrary.Database
+            //               .SqlQuery<string>("select name from sys.tables")?.ToList();
+            var list = typeof(UniversityLibrary).GetProperties()?.Select(info => info.Name.ToFirstLetterUpperCase()).ToList();
             list.Sort();
 
             return list;

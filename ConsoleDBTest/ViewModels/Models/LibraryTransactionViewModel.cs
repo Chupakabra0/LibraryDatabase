@@ -2,6 +2,7 @@
 using System.Linq;
 using ConsoleDBTest.DB;
 using ConsoleDBTest.Models;
+using ConsoleDBTest.Utils.StringUtils;
 
 namespace ConsoleDBTest.ViewModels {
     public class LibraryTransactionViewModel {
@@ -27,7 +28,7 @@ namespace ConsoleDBTest.ViewModels {
                            ?.ToList()
                            ?.First();
 
-            return worker == null ? "null" : $"{worker.Name.First()}. {worker.Patronymic.First()}. {worker.Surname}";
+            return worker == null ? "null" : StringUtils.GetPersonName(worker.Name, worker.Surname, worker.Patronymic);
         }
 
         private static string GetBookName(int bookId, UniversityLibrary db) =>
