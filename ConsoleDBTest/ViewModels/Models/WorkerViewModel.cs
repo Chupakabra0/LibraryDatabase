@@ -6,7 +6,7 @@ namespace ConsoleDBTest.ViewModels {
             this.Id         = worker.Id;
             this.Name       = worker.Name;
             this.Surname    = worker.Surname;
-            this.Patronymic = worker.Surname;
+            this.Patronymic = worker.Patronymic;
             this.IsActive   = worker.IsActive;
         }
 
