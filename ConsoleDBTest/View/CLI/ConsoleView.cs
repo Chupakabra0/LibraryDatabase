@@ -53,7 +53,7 @@ namespace ConsoleDBTest.View {
                         continue;
                     }
                     case nameof(ConsoleNoContextCommands.Online): case "O": {
-                        // TODO show context table
+                        this.ShowContextTable(tableName);
                         continue;
                     }
                     case nameof(ConsoleNoContextCommands.Tables): case "T": {
@@ -156,6 +156,15 @@ namespace ConsoleDBTest.View {
             Console.WriteLine(@"Table list:");
             this.GetTableList().ForEach(tableName => Console.Write($@"{tableName} "));
             Console.WriteLine();
+        }
+
+        private void ShowContextTable(string tableName) {
+            if (string.IsNullOrEmpty(tableName)) {
+                Console.WriteLine($@"There's no context table yet!");
+            }
+            else {
+                Console.WriteLine($@"Context table is {tableName}.");
+            }
         }
 
         private List<string> GetTableList() {
