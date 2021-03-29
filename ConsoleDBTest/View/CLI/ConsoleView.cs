@@ -60,10 +60,6 @@ namespace ConsoleDBTest.View {
                         this.ShowTableList();
                         continue;
                     }
-                    case nameof(ConsoleNoContextCommands.Sql): case "S": {
-                        // TODO sql mode
-                        continue;
-                    }
                     case nameof(ConsoleNoContextCommands.Go): case "G": {
                         tableName = this.GetGoTableName(arguments?.ElementAtOrDefault(1)?.ToFirstLetterUpperCase() ?? string.Empty, tableName);
                         continue;
@@ -124,11 +120,10 @@ namespace ConsoleDBTest.View {
             Console.WriteLine($"{string.Empty, 6}help{string.Empty, 26}Display help");
             Console.WriteLine($"{string.Empty, 6}quit{string.Empty, 26}Exit from the application");
             Console.WriteLine($"{string.Empty, 6}cls{string.Empty, 27}Clean screen");
-            Console.WriteLine($"{string.Empty, 6}tables [NOT-IMPLEMENTED]{string.Empty, 6}Display list of the tables in database");
-            Console.WriteLine($"{string.Empty, 6}online [NOT-IMPLEMENTED]{string.Empty, 6}Display context table name");
+            Console.WriteLine($"{string.Empty, 6}tables{string.Empty, 24}Display list of the tables in database");
+            Console.WriteLine($"{string.Empty, 6}online{string.Empty, 24}Display context table name");
             Console.WriteLine($"{string.Empty, 6}go <table-name>{string.Empty, 15}Make the table <table-name> the current command context");
             Console.WriteLine($"{string.Empty, 6}back{string.Empty, 26}Exit from context table");
-            Console.WriteLine($"{string.Empty, 6}sql [NOT-IMPLEMENTED]{string.Empty, 9}Enable/disable sql mode where you can type MS SQL commands");
             Console.WriteLine();
 
             Console.WriteLine($"{string.Empty, 4}Contexted command:");
