@@ -13,11 +13,24 @@ namespace ConsoleDBTest.ModelController {
                 var defaultBoolValue = true;
                 var defaultNullableValue = "null";
 
-                var dateGiven     = this.AskDate($"Enter DateTime DateGiven ({defaultNullableValue}): ");
-                var studentId     = this.AskNullableInt($"Enter int StudentId ({defaultNullableValue}): ");
-                var teacherId   = this.AskNullableInt($"Enter int TeacherId ({defaultNullableValue}): ");
-                var isActive = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
-
+                var  type      = this.AskType($"Teacher or student?: ");
+                int? studentId = null;
+                int? teacherId = null;
+                switch (type.First()) {
+                    case't': {
+                        teacherId = this.AskNullableInt($"Enter int TeacherId ({defaultNullableValue}): ");
+                        break;
+                    }
+                    case's': {
+                        studentId = this.AskNullableInt($"Enter int StudentId ({defaultNullableValue}): ");
+                        break;
+                    }
+                    default: {
+                        return false;
+                    }
+                }
+                var dateGiven = this.AskDate($"Enter DateTime DateGiven ({defaultNullableValue}): ");
+                var isActive  = this.AskBoolean($"Is it active? [true/false]({defaultBoolValue}): ", defaultBoolValue);
                 this.ClientCardDealer.AddCard(db, dateGiven, studentId, teacherId, isActive);
             }
             catch (Exception) {
@@ -93,5 +106,19 @@ namespace ConsoleDBTest.ModelController {
         }
 
         public ClientCardDealer ClientCardDealer { get; set; } = new();
+
+        private string AskType(string message) {
+            try {
+                Console.Write(message);
+                var result = this.ConsoleReader.ReadString().ToLower();
+
+                return result == "teacher" || result == "t" || result == "s" || result == "student" ?
+                    result :
+                    string.Empty;
+            }
+            catch (Exception) {
+                return string.Empty;
+            }
+        }
     }
 }
