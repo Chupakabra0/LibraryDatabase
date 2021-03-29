@@ -18,10 +18,6 @@ namespace ConsoleDBTest.ModelController {
         public abstract bool Remove(UniversityLibrary db);
         public abstract bool Edit(UniversityLibrary   db);
 
-        protected ConsoleController() {
-            this.ConsoleReader = new ConsoleReader();
-        }
-
         protected bool AskBoolean(string message, bool emptyResult = true) {
             try {
                 Console.Write(message);
@@ -101,6 +97,6 @@ namespace ConsoleDBTest.ModelController {
             return table;
         }
 
-        public ConsoleReader ConsoleReader { get; set; }
+        protected ConsoleReader ConsoleReader { get; } = new();
     }
 }

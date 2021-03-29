@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ConsoleDBTest.DB;
 using ConsoleDBTest.Reader;
 using ConsoleDBTest.Utils.StringUtils;
 using ConsoleDBTest.ViewModels.CLI;
+using ConsoleDBTest.Writer;
 
 namespace ConsoleDBTest.View {
     public class ConsoleView {
-        public ConsoleView(DatabaseViewModel databaseViewModel) {
+        public ConsoleView(DatabaseViewModel databaseViewModel) =>
             this.DatabaseViewModel = databaseViewModel;
-        }
 
         public DatabaseViewModel DatabaseViewModel { get; set; }
-        public ConsoleReader     ConsoleReader     { get; set; } = new();
 
         public void ShowMainMenu() {
-            Console.WriteLine(@"Connected to DB...");
+            this.ConsoleWriter.WriteSuccess(@"Connected to DB...");
             var isWorking = true;
             var tableName = string.Empty;
 
             while (isWorking) {
-                Console.Write(@"> ");
+                this.ConsoleWriter.Write(@">");
+                this.ConsoleWriter.WriteBlank();
 
                 var arguments = this.ConsoleReader.ReadString().Split(" ")
                                     .Select(word => word.ToFirstLetterUpperCase())
@@ -31,21 +30,18 @@ namespace ConsoleDBTest.View {
                 switch (command) {
                     case nameof(ConsoleNoContextCommands.Back): case "B": {
                         if (tableName != string.Empty) {
-                            Console.WriteLine($@"Exited from {tableName}...");
+                            this.ConsoleWriter.WriteInfo($@"Exited from {tableName}...");
                             tableName = string.Empty;
-                        }
-                        else {
-                            // TODO smth
                         }
                         continue;
                     }
                     case nameof(ConsoleNoContextCommands.Quit): case "Q": {
-                        Console.WriteLine(@"Work has completed...");
+                        this.ConsoleWriter.WriteInfo(@"Work has completed...");
                         isWorking = false;
                         continue;
                     }
                     case nameof(ConsoleNoContextCommands.Cls): case "C": {
-                        Console.Clear();
+                        this.ConsoleWriter.Cls();
                         continue;
                     }
                     case nameof(ConsoleNoContextCommands.Help): case "H": {
@@ -67,7 +63,7 @@ namespace ConsoleDBTest.View {
                 }
 
                 if (tableName == string.Empty) {
-                    Console.WriteLine($@"Command {command} doesn't exist!");
+                    this.ConsoleWriter.WriteError($@"Command {command} doesn't exist at this context!");
                 }
                 else {
                     switch (command) {
@@ -76,15 +72,33 @@ namespace ConsoleDBTest.View {
                             break;
                         }
                         case nameof(ConsoleContextCommands.Add): case "A": {
-                            this.DatabaseViewModel.ExecuteAdd(tableName);
+                            if (this.DatabaseViewModel.ExecuteAdd(tableName)) {
+                                this.ConsoleWriter.WriteSuccess($@"Item successfully added to {tableName}.");
+                            }
+                            else {
+                                this.ConsoleWriter.WriteError($@"Adding to {tableName} was failed.");
+                            }
+
                             break;
                         }
                         case nameof(ConsoleContextCommands.Edit): case "E": {
-                            this.DatabaseViewModel.ExecuteEdit(tableName);
+                            if (this.DatabaseViewModel.ExecuteEdit(tableName)) {
+                                this.ConsoleWriter.WriteSuccess($@"Item successfully edited at {tableName}.");
+                            }
+                            else {
+                                this.ConsoleWriter.WriteError($@"Editing at {tableName} was failed.");
+                            }
+
                             break;
                         }
                         case nameof(ConsoleContextCommands.Remove): case "R": {
-                            this.DatabaseViewModel.ExecuteRemove(tableName);
+                            if (this.DatabaseViewModel.ExecuteRemove(tableName)) {
+                                this.ConsoleWriter.WriteSuccess($@"Item successfully removed from {tableName}.");
+                            }
+                            else {
+                                this.ConsoleWriter.WriteError($@"Removing from {tableName} was failed.");
+                            }
+
                             break;
                         }
                         //case nameof(ConsoleContextCommands.Duplicate): case "D": {
@@ -92,7 +106,7 @@ namespace ConsoleDBTest.View {
                         //    break;
                         //}
                         default: {
-                            Console.WriteLine($@"Command {command} doesn't exist!");
+                            this.ConsoleWriter.WriteError($@"Command {command} doesn't exist!");
                             break;
                         }
                     }
@@ -101,74 +115,75 @@ namespace ConsoleDBTest.View {
         }
 
         private void ShowHelp() {
-            var link = @"#";
-            Console.WriteLine("University Library Database application...");
-            Console.WriteLine("Copyright (C) 2021 by Chupakabra, All Rights Reserved");
-            Console.WriteLine();
+            var link = @"https://github.com/Chupakabra0/LibraryDatabase";
+            this.ConsoleWriter.WriteInfo("University Library Database application...");
+            this.ConsoleWriter.WriteInfo("Copyright (C) 2021 by Chupakabra, All Rights Reserved");
+            this.ConsoleWriter.WriteNewLine();
 
-            Console.WriteLine($"GitHub link: {link}");
-            Console.WriteLine();
+            this.ConsoleWriter.WriteInfo($"GitHub link: {link}");
+            this.ConsoleWriter.WriteNewLine();
 
-            Console.WriteLine("Usage:");
-            Console.WriteLine($"{string.Empty, 2}<command>");
-            Console.WriteLine();
+            this.ConsoleWriter.WriteInfo("Usage:");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 2}<command>");
+            this.ConsoleWriter.WriteNewLine();
 
-            Console.WriteLine("Where:");
-            Console.WriteLine($"{string.Empty, 2}<command>");
+            this.ConsoleWriter.WriteInfo("Where:");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 2}<command>");
 
-            Console.WriteLine($"{string.Empty, 4}Not contexted command:");
-            Console.WriteLine($"{string.Empty, 6}help{string.Empty, 26}Display help");
-            Console.WriteLine($"{string.Empty, 6}quit{string.Empty, 26}Exit from the application");
-            Console.WriteLine($"{string.Empty, 6}cls{string.Empty, 27}Clean screen");
-            Console.WriteLine($"{string.Empty, 6}tables{string.Empty, 24}Display list of the tables in database");
-            Console.WriteLine($"{string.Empty, 6}online{string.Empty, 24}Display context table name");
-            Console.WriteLine($"{string.Empty, 6}go <table-name>{string.Empty, 15}Make the table <table-name> the current command context");
-            Console.WriteLine($"{string.Empty, 6}back{string.Empty, 26}Exit from context table");
-            Console.WriteLine();
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 4}Not contexted command:");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}help{string.Empty, 26}Display help");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}quit{string.Empty, 26}Exit from the application");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}cls{string.Empty, 27}Clean screen");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}tables{string.Empty, 24}Display list of the tables in database");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}online{string.Empty, 24}Display context table name");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}go <table-name>{string.Empty, 15}Make the table <table-name> the current command context");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}back{string.Empty, 26}Exit from context table");
+            this.ConsoleWriter.WriteNewLine();
 
-            Console.WriteLine($"{string.Empty, 4}Contexted command:");
-            Console.WriteLine($"{string.Empty, 6}show{string.Empty, 26}Display current context table");
-            Console.WriteLine($"{string.Empty, 6}add{string.Empty, 27}Insert new item into the context table");
-            Console.WriteLine($"{string.Empty, 6}edit{string.Empty, 26}Edit existing item in the context table by id");
-            Console.WriteLine($"{string.Empty, 6}remove{string.Empty, 24}Remove existing item in the context table by id");
-            Console.WriteLine($"{string.Empty, 6}duplicate [NOT-IMPLEMENTED]{string.Empty, 3}Copy existing item to the context table by id");
-            Console.WriteLine();
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 4}Contexted command:");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}show{string.Empty, 26}Display current context table");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}add{string.Empty, 27}Insert new item into the context table");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}edit{string.Empty, 26}Edit existing item in the context table by id");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}remove{string.Empty, 24}Remove existing item in the context table by id");
+            this.ConsoleWriter.WriteInfo($"{string.Empty, 6}duplicate [NOT-IMPLEMENTED]{string.Empty, 3}Copy existing item to the context table by id");
+            this.ConsoleWriter.WriteNewLine();
         }
 
         private string GetGoTableName(string tableName, string defaultValue) {
             if (this.GetTableList().Contains(tableName)) {
-                Console.WriteLine($@"Connected to {tableName}...");
+                this.ConsoleWriter.WriteSuccess($@"Connected to {tableName}...");
                 return tableName;
             }
             if (!string.IsNullOrEmpty(tableName)) {
-                Console.WriteLine($@"Table {tableName} doesn't exist!");
+                this.ConsoleWriter.WriteError($@"Table {tableName} doesn't exist!");
             }
 
             return defaultValue;
         }
 
         private void ShowTableList() {
-            Console.WriteLine(@"Table list:");
-            this.GetTableList().ForEach(tableName => Console.Write($@"{tableName} "));
-            Console.WriteLine();
+            this.ConsoleWriter.WriteInfo(@"Table list:");
+            this.GetTableList().ForEach(tableName => this.ConsoleWriter.WriteInfo(tableName));
+            this.ConsoleWriter.WriteNewLine();
         }
 
         private void ShowContextTable(string tableName) {
             if (string.IsNullOrEmpty(tableName)) {
-                Console.WriteLine($@"There's no context table yet!");
+                this.ConsoleWriter.WriteError($@"There's no context table yet!");
             }
             else {
-                Console.WriteLine($@"Context table is {tableName}.");
+                this.ConsoleWriter.WriteInfo($@"Context table is {tableName}.");
             }
         }
 
         private List<string> GetTableList() {
-            //var list = this.DatabaseViewModel.UniversityLibrary.Database
-            //               .SqlQuery<string>("select name from sys.tables")?.ToList();
             var list = typeof(UniversityLibrary).GetProperties()?.Select(info => info.Name.ToFirstLetterUpperCase()).ToList();
             list.Sort();
 
             return list;
         }
+
+        private ConsoleReader ConsoleReader { get; } = new();
+        private ConsoleWriter ConsoleWriter { get; } = new();
     }
 }
